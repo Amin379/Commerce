@@ -1,0 +1,72 @@
+{% extends 'auctions/layout.html' %}
+
+{%block body%}
+{% if user.is_authenticated %}
+{%if exist is not True %}
+<a style="margin: 20px;" href="{% url 'watchlistAdd' id%}">Add to watchlist</a>
+{%else%}
+<a style="margin: 20px;" href="{% url 'watchlistRemove' id%}">Remove from watchlist</a>
+{% endif %}
+<hr>
+{% endif %}
+{{error}}
+<ul>
+    <li>
+        <p>Title: {{asset.title}}</p>
+    </li>
+    <li>
+        <p>Description: {{asset.description}}</p>
+    </li>
+    <li>
+        <p>Bid: 
+            <ul>
+                {%for i in asset.bid.all%}
+                <li>
+                {{i}}
+                </li>
+                {%endfor%}
+            </ul> 
+        </p>
+    </li>
+    {% if user.is_authenticated %}
+    {% if asset.open == True %}
+    <li>
+        <form action="{% url 'asset' id %}" method="post">
+            {%csrf_token%}
+            <input type="hidden" name="form" value="bid">
+            Add bid: <input type="number" name="bid">
+            <input type="submit" value="Submit">
+        </form>
+    </li>
+    {% else %}
+    <p>This auction is closed and the winner is "{{asset.bid.last.user}}"!</p>
+    {% endif %}
+    {% endif %}
+</ul>
+<div style="margin: 20px;">
+Comments:
+<ul>
+{% for i in asset.comment.all %}
+<li>{{i.user.username}} : <pre>"{{i.text}}"</pre></li>
+{% endfor %}
+{% if user.is_authenticated %}
+</ul>
+{% if asset.user == user and asset.open == True%}
+</div>
+<hr>
+<form style="margin: 20px;" action="{% url 'asset' id%}" method="post">
+    {%csrf_token%}
+    <input type="hidden" name="form" value="close">
+    <input type="submit" value="Close your auction!">
+</form>
+{% endif %}
+<hr>
+<form style="margin: 20px;" action="{% url 'asset' id %}" method="post">
+    {%csrf_token%}
+    <input type="hidden" name="form" value="comment">
+    <textarea name="comment" cols="80" rows="5" required placeholder="Drop your comment here!"></textarea>
+    <p> <input type="submit" value="Send"> </p>
+</form>
+{% endif %}
+
+{% endblock %}
