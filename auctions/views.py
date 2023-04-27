@@ -73,7 +73,7 @@ def create_listing(request):
         title = request.POST["title"]
         description = request.POST["description"]
         bid = request.POST["bid"]
-        image = request.POST["image"]
+        image = request.FILES["image"]
         asset = Asset.objects.create(title = title, description = description, user = request.user, image = image)
         bid = Bid.objects.create(price = bid, asset = asset, user = request.user)
         return render(request, "auctions/create_listing.html")
