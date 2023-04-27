@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.db.models import Max
 
-from .models import User, Asset, Bid, Comment
+from .models import *
 
 
 def index(request):
@@ -73,7 +73,8 @@ def create_listing(request):
         title = request.POST["title"]
         description = request.POST["description"]
         bid = request.POST["bid"]
-        asset = Asset.objects.create(title = title, description = description, user = request.user)
+        image = request.POST["image"]
+        asset = Asset.objects.create(title = title, description = description, user = request.user, image = image)
         bid = Bid.objects.create(price = bid, asset = asset, user = request.user)
         return render(request, "auctions/create_listing.html")
     return render(request, "auctions/create_listing.html")

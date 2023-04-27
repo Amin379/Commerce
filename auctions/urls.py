@@ -14,3 +14,4 @@ urlpatterns = [
     path("watchlist", views.watchlist, name="watchlist")
 
 ]
+

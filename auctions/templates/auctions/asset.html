@@ -15,6 +15,9 @@
         <p>Title: {{asset.title}}</p>
     </li>
     <li>
+        <p><img src="{{asset.image.url}}" alt="image"></p>
+    </li>
+    <li>
         <p>Description: {{asset.description}}</p>
     </li>
     <li>
@@ -48,6 +51,8 @@ Comments:
 <ul>
 {% for i in asset.comment.all %}
 <li>{{i.user.username}} : <pre>"{{i.text}}"</pre></li>
+{%empty%}
+<li>There is no comment!</li>
 {% endfor %}
 {% if user.is_authenticated %}
 </ul>

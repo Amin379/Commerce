@@ -3,7 +3,6 @@ from django.db import models
 
 class User(AbstractUser):
     watchlist = models.ManyToManyField('Asset', blank=True, related_name="watchlist")
-    pass
 
 class Bid(models.Model):
     price = models.PositiveSmallIntegerField()
@@ -26,3 +25,4 @@ class Asset(models.Model):
     open = models.BooleanField(default=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now=True)
+    image = models.ImageField(upload_to="img")
