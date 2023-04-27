@@ -1,2 +1,3 @@
-auction/__pycache__/
 commerce/__pycache__/
+auction/__pycache__/
+auction/migrations/__pycache__/
