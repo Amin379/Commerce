@@ -4,17 +4,17 @@
 <form action="{% url 'create_listing' %}" method="post"   enctype="multipart/form-data">
     {% csrf_token %}
     <div class="form-group">
-        <input class="form-control" autofocus type="text" name="title" placeholder="Title">
+        <input class="form-control" autofocus type="text" name="title" placeholder="Title" required>
     </div>
     <div class="form-group">
-        <textarea class="form-control" name="description" placeholder="Description"></textarea>
+        <textarea class="form-control" name="description" placeholder="Description" required></textarea>
     </div>
     <div class="form-group">
-        <input class="form-control" type="number" name="bid" placeholder="Bid">
+        <input class="form-control" type="number" name="bid" placeholder="Bid" required>
     </div>
     <div class="form-group">
         <label for="image">Select an image:</label>
-        <input class="form-control" type="file" name="image">
+        <input class="form-control" type="file" name="image" required>
     </div>
     <input class="btn btn-primary" type="submit" value="Confirm">
 </form>
