@@ -13,6 +13,8 @@
             <p>Bid: {{i.bid.last.price}}</p>
         </li>
         <hr>
+        {%empty%}
+        <h5>Your watchlist is empty!</h5>
         {%endfor%}
     </ul>
     {{f}} 

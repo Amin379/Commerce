@@ -7,7 +7,7 @@
             <p>Title: <a href="{% url 'asset' i.id%}">{{i.title}}</a></p>
         </li>
         <li>
-            <p><img src="{{i.image.url}}" alt="image"></p>
+            <p><img style="max-width: 50%;" src="{{i.image.url}}" alt="image"></p>
         </li>
         <li>
             <p>Description: {{i.description}}</p>
